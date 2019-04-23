@@ -5,6 +5,7 @@
  */
 package memory_barti;
 
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
@@ -19,12 +20,10 @@ public class Menu {
 
     static void menu(BorderPane root, Stage primaryStage) {
 
-        Text Logo = new Text("Logo");
-        Logo.setStyle("-fx-font-size: 60pt;");
-        Logo.setFill(Color.WHITE);
-        Logo.setLayoutY(240);
-        Logo.setLayoutX(470);
-        Logo.setPickOnBounds(true);
+        ImageView Logo = new ImageView("file:logo.png");
+        Logo.setLayoutY(50);
+        Logo.setLayoutX(300);
+       
 
         Text Start = new Text("Start");
         Start.setStyle("-fx-font-size: 60pt;");

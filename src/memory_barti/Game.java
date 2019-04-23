@@ -38,7 +38,6 @@ public class Game {
         Collections.shuffle(Cards);
         int y = 0;
         int z = 0;
-        
         for (int i = 0; i < 18; i++) // Pętla do Rozmieszania Kart
         {
             if (i == 6 || i == 12) {  // Po 6 kart w rzędzie
@@ -65,9 +64,7 @@ public class Game {
         Controller controller = new Controller();
         ArrayList<Card> listCards = mashupCards(createCard(controller));
         showAllCards(root, listCards);
-        //  int count = 9;
         controller.setListCards(listCards);
-        //  ArrayList<Card> list = new ArrayList<Card>();
         Text ReStart = new Text("Restart");
         ReStart.setStyle("-fx-font-size: 50pt;");
         ReStart.setFill(Color.WHITE);
@@ -76,34 +73,6 @@ public class Game {
         ReStart.setPickOnBounds(true);
         root.getChildren().add(ReStart);
 
-
-        /*
-        for (int i = 0; i < 18; i++) {
-            if (listCards.get(i).isInverted()) {
-                list.add(listCards.get(i));
-            }
-            if (list.size() == 2) {
-                if ((int) list.get(0).getCouple() == (int) list.get(1).getCouple()) {
-                    root.getChildren().remove(list.get(0));
-                    root.getChildren().remove(list.get(1));
-                    count--;
-                    list.clear();
-                    if (count == 0) {
-                        // Wynik Końcowy
-                    }
-                    break;
-                } else {
-                    list.get(0).flipCard();
-                    list.get(1).flipCard();
-                    list.clear();
-                    break;
-                }
-            }
-            if (i == 17) {
-                list.clear();
-            }
-        }
-         */
         ReStart.setOnMouseExited((MouseEvent e) -> { // Po zjechaniu wykonaj
             ReStart.setFill(Color.WHITE);
         });

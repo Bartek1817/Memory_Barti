@@ -15,10 +15,12 @@ public class Controller {
 
     ArrayList<Card> listCards;
     ArrayList<Card> list2;
+    int points;
 
     public Controller() {
         this.listCards = null;
         this.list2 = new ArrayList<Card>();
+        this.points = 0;
     }
 
     public ArrayList<Card> getListCard() {
@@ -39,14 +41,22 @@ public class Controller {
 
         if (this.list2.size() == 2) {
             if (this.list2.get(0).getCouple() == this.list2.get(1).getCouple()) {
-
+                this.points++;
                 list2.clear();
 
             } else {
+                new java.util.Timer().schedule(
+                        new java.util.TimerTask() {
+                    @Override
+                    public void run() {
+                        list2.get(0).flipCard();
+                        list2.get(1).flipCard();
+                        list2.clear();
+                    }
+                },
+                        400
+                );
 
-                list2.get(0).flipCard();
-                list2.get(1).flipCard();
-                list2.clear();
             }
         }
     }

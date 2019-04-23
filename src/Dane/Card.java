@@ -110,9 +110,9 @@ public class Card extends ImageView {
  
     public final void addEvenHandler() {
         this.setOnMouseClicked((MouseEvent e) -> {
-            if (this.inverted == false) {
+            if (this.inverted == false && this.controller.getList2().size()<2) { // blokada żeby tylko 2 karty mogł być odwrócone
                 flipCard();
-                this.controller.checkCard(this); // to ma poczekać! 
+                this.controller.checkCard(this);
             }
         });
     }
