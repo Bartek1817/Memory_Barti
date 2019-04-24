@@ -6,6 +6,9 @@
 package Dane;
 
 import java.util.ArrayList;
+import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
+import memory_barti.Game;
 
 /**
  *
@@ -16,11 +19,17 @@ public class Controller {
     ArrayList<Card> listCards;
     ArrayList<Card> list2;
     int points;
+    int maxpoints;
+    private BorderPane root;
+    private Stage primaryStage;
 
-    public Controller() {
+    public Controller(BorderPane root, Stage primaryStage) {
         this.listCards = null;
         this.list2 = new ArrayList<Card>();
         this.points = 0;
+        this.maxpoints = 9;
+        this.root = root;
+        this.primaryStage = primaryStage;
     }
 
     public ArrayList<Card> getListCard() {
@@ -42,7 +51,11 @@ public class Controller {
         if (this.list2.size() == 2) {
             if (this.list2.get(0).getCouple() == this.list2.get(1).getCouple()) {
                 this.points++;
+                Game.hideCards(this);
                 list2.clear();
+                if (this.points == this.maxpoints) { // end
+                    Game.summaryFunction(this);
+                }
 
             } else {
                 new java.util.Timer().schedule(
@@ -59,5 +72,19 @@ public class Controller {
 
             }
         }
+    }
+
+    /**
+     * @return the root
+     */
+    public BorderPane getRoot() {
+        return root;
+    }
+
+    /**
+     * @return the primaryStage
+     */
+    public Stage getPrimaryStage() {
+        return primaryStage;
     }
 }
