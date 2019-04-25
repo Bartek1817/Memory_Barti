@@ -25,14 +25,14 @@ import javafx.stage.Stage;
  */
 public class Game {
 
-    public static ArrayList<Card> createCard(Controller controller) { // Tworzenie Kart
+    public static ArrayList<Card> createCard(Controller controller, char category) { // Tworzenie Kart
         int j = 0;
         ArrayList<Card> listCard = new ArrayList<Card>();
 
         for (int i = 0; i < 18; i++) // Pętla do tworzenia Kart
         {
             j = i / 2; // Pary kart takich samych
-            Card card = new Card(i + 100, "file:karta.jpg", "file:" + j + ".png", j, controller);
+            Card card = new Card(i + 100, "file:karta.jpg", "file:" + category + j + ".png", j, controller);
             listCard.add(card);
         }
         return listCard;
@@ -71,49 +71,37 @@ public class Game {
 
     public static void summaryFunction(Controller controller) {
 
+        controller.getKtimer().stopTimer();
         Text Summary = new Text("Gratulację!");
         Summary.setStyle("-fx-font-size: 90pt;");
         Summary.setFill(Color.WHITE);
-        Summary.setLayoutY(350);
+        Summary.setLayoutY(200);
         Summary.setLayoutX(250);
         Summary.setPickOnBounds(true);
         controller.getRoot().getChildren().add(Summary);
+
+        Text Time = new Text("Twój Czas to: \n" + controller.getKtimer().getSspTime().get());
+        Time.setStyle("-fx-font-size: 50pt;");
+        Time.setFill(Color.WHITE);
+        Time.setLayoutY(300);
+        Time.setLayoutX(250);
+        Time.setPickOnBounds(true);
+        controller.getRoot().getChildren().add(Time);
     }
 
-    static void menu(BorderPane root, Stage primaryStage) {
-
-        Controller controller = new Controller(root, primaryStage);
-        ArrayList<Card> listCards = mashupCards(createCard(controller));
-        showAllCards(root, listCards);
-        controller.setListCards(listCards);
+    static void menu(BorderPane root, Stage primaryStage, char category) {
 
         KTimer ktimer = new KTimer();
-        Text timeText = new Text(ktimer.getSspTime().get());
-        timeText.setFill(Color.WHITE);
-        timeText.setStyle("-fx-font-size: 40pt;");
-        timeText.setLayoutY(200);
-        timeText.setLayoutX(930);
-        root.getChildren().add(timeText);
-        ktimer.startTimer(0);
-        ktimer.getSspTime().addListener(new InvalidationListener() {
-
-        @Override
-        public void invalidated(Observable observable) {
-            timeText.setText(ktimer.getSspTime().get());
-        }
-    });
-        Text Time = new Text("Twój Czas: ");
-        Time.setStyle("-fx-font-size: 40pt;");
-        Time.setFill(Color.WHITE);
-        Time.setLayoutY(100);
-        Time.setLayoutX(920);
-        Time.setPickOnBounds(true);
-        root.getChildren().add(Time);
+        Controller controller = new Controller(root, primaryStage, ktimer);
+        ArrayList<Card> listCards = mashupCards(createCard(controller, category));
+        showAllCards(root, listCards);
+        controller.setListCards(listCards);
+        controller.getKtimer().startTimer(0);
 
         Text ReStart = new Text("Restart");
         ReStart.setStyle("-fx-font-size: 40pt;");
         ReStart.setFill(Color.WHITE);
-        ReStart.setLayoutY(325);
+        ReStart.setLayoutY(100);
         ReStart.setLayoutX(970);
         ReStart.setPickOnBounds(true);
         root.getChildren().add(ReStart);
@@ -126,7 +114,7 @@ public class Game {
         });
         ReStart.setOnMouseClicked((MouseEvent e) -> {
             root.getChildren().clear();
-            Game.menu(root, primaryStage);
+            Game.menu(root, primaryStage, category);
         });
 
         Text Back = new Text("Powrót");

@@ -22,14 +22,20 @@ public class Controller {
     int maxpoints;
     private BorderPane root;
     private Stage primaryStage;
+    KTimer ktimer;
 
-    public Controller(BorderPane root, Stage primaryStage) {
+    public Controller(BorderPane root, Stage primaryStage, KTimer ktimer) {
         this.listCards = null;
         this.list2 = new ArrayList<Card>();
         this.points = 0;
         this.maxpoints = 9;
         this.root = root;
         this.primaryStage = primaryStage;
+        this.ktimer = ktimer;
+    }
+
+    public KTimer getKtimer() {
+        return ktimer;
     }
 
     public ArrayList<Card> getListCard() {
