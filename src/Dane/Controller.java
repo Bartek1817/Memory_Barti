@@ -7,6 +7,8 @@ package Dane;
 
 import java.util.ArrayList;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import memory_barti.Game;
 
@@ -20,9 +22,11 @@ public class Controller {
     ArrayList<Card> list2;
     int points;
     int maxpoints;
-    private BorderPane root;
-    private Stage primaryStage;
+    private final BorderPane root;
+    private final Stage primaryStage;
     KTimer ktimer;
+    Text ClickAmount;
+    int click;
 
     public Controller(BorderPane root, Stage primaryStage, KTimer ktimer) {
         this.listCards = null;
@@ -32,6 +36,14 @@ public class Controller {
         this.root = root;
         this.primaryStage = primaryStage;
         this.ktimer = ktimer;
+        this.click = 0;
+        this.ClickAmount = new Text("Ilość Kliknięć \n" + "         " + click);
+        ClickAmount.setStyle("-fx-font-size: 35pt;");
+        ClickAmount.setFill(Color.WHITE);
+        ClickAmount.setLayoutY(275);
+        ClickAmount.setLayoutX(930);
+        ClickAmount.setPickOnBounds(true);
+        root.getChildren().add(ClickAmount);
     }
 
     public KTimer getKtimer() {
@@ -48,6 +60,10 @@ public class Controller {
 
     public ArrayList<Card> getList2() {
         return list2;
+    }
+
+    public void addClickAmount(int click) {
+        ClickAmount.setText("Ilość Kliknięć \n" + "         " + click);
     }
 
     public void checkCard(Card card) {

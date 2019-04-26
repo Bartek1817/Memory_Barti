@@ -97,12 +97,16 @@ public class Menu {
         Start.setOnMouseClicked((MouseEvent e) -> {
             root.getChildren().clear();
             root.getChildren().clear();
-            if (NameCategory.getText().equals("Zwierzęta")) {
-                Game.menu(root, primaryStage, 'z');
-            } else if ((NameCategory.getText().equals("Budowle"))) {
-                Game.menu(root, primaryStage, 'b');
-            } else {
-                Game.menu(root, primaryStage, 'p');
+            switch (NameCategory.getText()) {
+                case "Zwierzęta":
+                    Game.menu(root, primaryStage, 'z');
+                    break;
+                case "Budowle":
+                    Game.menu(root, primaryStage, 'b');
+                    break;
+                default:
+                    Game.menu(root, primaryStage, 'p');
+                    break;
             }
         });
 
@@ -151,10 +155,8 @@ public class Menu {
                 case "Pojazdy":
                     NameCategory.setText("Budowle");
                     break;
-                case "Budowle":
-                    NameCategory.setText("Zwierzęta");
-                    break;
                 default:
+                    NameCategory.setText("Zwierzęta");
                     break;
             }
         });

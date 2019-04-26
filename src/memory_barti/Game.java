@@ -10,9 +10,7 @@ import Dane.Controller;
 import Dane.KTimer;
 import java.util.ArrayList;
 import java.util.Collections;
-import javafx.beans.InvalidationListener;
-import javafx.beans.Observable;
-import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
@@ -26,13 +24,11 @@ import javafx.stage.Stage;
 public class Game {
 
     public static ArrayList<Card> createCard(Controller controller, char category) { // Tworzenie Kart
-        int j = 0;
         ArrayList<Card> listCard = new ArrayList<Card>();
 
         for (int i = 0; i < 18; i++) // Pętla do tworzenia Kart
         {
-            j = i / 2; // Pary kart takich samych
-            Card card = new Card(i + 100, "file:karta.jpg", "file:" + category + j + ".png", j, controller);
+            Card card = new Card(i + 100, "file:karta.jpg", "file:" + category + i/2 + ".png", i/2, controller);
             listCard.add(card);
         }
         return listCard;
@@ -98,10 +94,15 @@ public class Game {
         controller.setListCards(listCards);
         controller.getKtimer().startTimer(0);
 
+        ImageView Logo = new ImageView("file:logo200.png");
+        Logo.setLayoutY(50);
+        Logo.setLayoutX(910);
+        root.getChildren().add(Logo);
+
         Text ReStart = new Text("Restart");
         ReStart.setStyle("-fx-font-size: 40pt;");
         ReStart.setFill(Color.WHITE);
-        ReStart.setLayoutY(100);
+        ReStart.setLayoutY(425);
         ReStart.setLayoutX(970);
         ReStart.setPickOnBounds(true);
         root.getChildren().add(ReStart);
@@ -118,10 +119,10 @@ public class Game {
         });
 
         Text Back = new Text("Powrót");
-        Back.setStyle("-fx-font-size: 30pt;");
+        Back.setStyle("-fx-font-size: 40pt;");
         Back.setFill(Color.WHITE);
-        Back.setLayoutY(550);
-        Back.setLayoutX(1000);
+        Back.setLayoutY(530);
+        Back.setLayoutX(970);
         Back.setPickOnBounds(true);
         root.getChildren().add(Back);
 

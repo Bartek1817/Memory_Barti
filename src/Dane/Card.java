@@ -5,12 +5,9 @@
  */
 package Dane;
 
-import javafx.animation.RotateTransition;
-import javafx.event.EventType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import memory_barti.Game;
 
 /**
  *
@@ -107,10 +104,11 @@ public class Card extends ImageView {
             this.inverted = false;
         }
     }
- 
+
     public final void addEvenHandler() {
         this.setOnMouseClicked((MouseEvent e) -> {
-            if (this.inverted == false && this.controller.getList2().size()<2) { // blokada żeby tylko 2 karty mogł być odwrócone
+            if (this.inverted == false && this.controller.getList2().size() < 2) { // blokada żeby tylko 2 karty mogł być odwrócone
+                controller.addClickAmount(++controller.click);
                 flipCard();
                 this.controller.checkCard(this);
             }
