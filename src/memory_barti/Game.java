@@ -10,6 +10,7 @@ import Dane.Controller;
 import Dane.KTimer;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Random;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
@@ -23,13 +24,21 @@ import javafx.stage.Stage;
  */
 public class Game {
 
-    public static ArrayList<Card> createCard(Controller controller, char category) { // Tworzenie Kart
+    public static ArrayList<Card> createCard(Controller controller, char category, String level) { // Tworzenie Kart
         ArrayList<Card> listCard = new ArrayList<Card>();
 
-        for (int i = 0; i < 18; i++) // Pętla do tworzenia Kart
-        {
-            Card card = new Card(i + 100, "file:karta.jpg", "file:" + category + i/2 + ".png", i/2, controller);
-            listCard.add(card);
+        if (!level.equals("Trudny")) {
+            int front = new Random().nextInt(5);
+            for (int i = 0; i < 18; i++) // Pętla do tworzenia Kart
+            {
+                Card card = new Card(i + 100, "file:karta" + front + ".jpg", "file:" + category + i / 2 + ".png", i / 2, controller);
+                listCard.add(card);
+            }
+        } else {
+            for (int i = 0; i < 18; i++) {
+                Card card = new Card(i + 100, "file:karta" + new Random().nextInt(5) + ".jpg", "file:" + category + i / 2 + ".png", i / 2, controller);
+                listCard.add(card);
+            }
         }
         return listCard;
     }
@@ -65,6 +74,30 @@ public class Game {
 
     }
 
+    static void flipAllCards(Controller controller, String level) {
+        int time;
+        if (level.equals("Łatwy")) {
+            time = 1750;
+        } else {
+            time = 500;
+        }
+        for (int i = 0; i < controller.getListCard().size(); i++) {
+            controller.getListCard().get(i).flipCard();
+        }
+        new java.util.Timer().schedule(
+                new java.util.TimerTask() {
+            @Override
+            public void run() {
+                for (int i = 0; i < controller.getListCard().size(); i++) {
+                    controller.getListCard().get(i).flipCard();
+                }
+            }
+        },
+                time
+        );
+
+    }
+
     public static void summaryFunction(Controller controller) {
 
         controller.getKtimer().stopTimer();
@@ -85,13 +118,18 @@ public class Game {
         controller.getRoot().getChildren().add(Time);
     }
 
-    static void menu(BorderPane root, Stage primaryStage, char category) {
+    static void menu(BorderPane root, Stage primaryStage, char category, String level) {
 
         KTimer ktimer = new KTimer();
         Controller controller = new Controller(root, primaryStage, ktimer);
-        ArrayList<Card> listCards = mashupCards(createCard(controller, category));
+        ArrayList<Card> listCards = mashupCards(createCard(controller, category, level));
         showAllCards(root, listCards);
         controller.setListCards(listCards);
+
+        if (level.equals("Łatwy") || level.equals("Średni")) {
+            flipAllCards(controller, level);
+        }
+
         controller.getKtimer().startTimer(0);
 
         ImageView Logo = new ImageView("file:logo200.png");
@@ -115,7 +153,7 @@ public class Game {
         });
         ReStart.setOnMouseClicked((MouseEvent e) -> {
             root.getChildren().clear();
-            Game.menu(root, primaryStage, category);
+            Game.menu(root, primaryStage, category, level);
         });
 
         Text Back = new Text("Powrót");

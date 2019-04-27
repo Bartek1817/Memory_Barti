@@ -26,17 +26,49 @@ public class Menu {
         root.getChildren().add(Logo);
 
         Text Start = new Text("Start");
-        Start.setStyle("-fx-font-size: 40pt;");
+        Start.setStyle("-fx-font-size: 65pt;");
         Start.setFill(Color.WHITE);
-        Start.setLayoutY(470);
-        Start.setLayoutX(290);
+        Start.setLayoutY(415);
+        Start.setLayoutX(522);
         Start.setPickOnBounds(true);
         root.getChildren().add(Start);
+
+        Text LeftLevel = new Text("<-");
+        LeftLevel.setStyle("-fx-font-size: 40pt;");
+        LeftLevel.setFill(Color.WHITE);
+        LeftLevel.setLayoutY(512);
+        LeftLevel.setLayoutX(205);
+        LeftLevel.setPickOnBounds(true);
+        root.getChildren().add(LeftLevel);
+
+        Text Level = new Text("Poziom");
+        Level.setStyle("-fx-font-size: 30pt;");
+        Level.setFill(Color.WHITE);
+        Level.setLayoutY(510);
+        Level.setLayoutX(255);
+        Level.setPickOnBounds(true);
+        root.getChildren().add(Level);
+
+        Text RightLevel = new Text("->");
+        RightLevel.setStyle("-fx-font-size: 40pt;");
+        RightLevel.setFill(Color.WHITE);
+        RightLevel.setLayoutY(512);
+        RightLevel.setLayoutX(383);
+        RightLevel.setPickOnBounds(true);
+        root.getChildren().add(RightLevel);
+
+        Text NameLevel = new Text("Łatwy");
+        NameLevel.setStyle("-fx-font-size: 40pt;");
+        NameLevel.setFill(Color.WHITE);
+        NameLevel.setLayoutY(570);
+        NameLevel.setLayoutX(255);
+        NameLevel.setPickOnBounds(true);
+        root.getChildren().add(NameLevel);
 
         Text Left = new Text("<-");
         Left.setStyle("-fx-font-size: 40pt;");
         Left.setFill(Color.WHITE);
-        Left.setLayoutY(412);
+        Left.setLayoutY(512);
         Left.setLayoutX(472);
         Left.setPickOnBounds(true);
         root.getChildren().add(Left);
@@ -44,7 +76,7 @@ public class Menu {
         Text Category = new Text("Kategoria");
         Category.setStyle("-fx-font-size: 30pt;");
         Category.setFill(Color.WHITE);
-        Category.setLayoutY(410);
+        Category.setLayoutY(510);
         Category.setLayoutX(525);
         Category.setPickOnBounds(true);
         root.getChildren().add(Category);
@@ -52,7 +84,7 @@ public class Menu {
         Text Right = new Text("->");
         Right.setStyle("-fx-font-size: 40pt;");
         Right.setFill(Color.WHITE);
-        Right.setLayoutY(412);
+        Right.setLayoutY(512);
         Right.setLayoutX(690);
         Right.setPickOnBounds(true);
         root.getChildren().add(Right);
@@ -60,7 +92,7 @@ public class Menu {
         Text NameCategory = new Text("Zwierzęta");
         NameCategory.setStyle("-fx-font-size: 40pt;");
         NameCategory.setFill(Color.WHITE);
-        NameCategory.setLayoutY(470);
+        NameCategory.setLayoutY(570);
         NameCategory.setLayoutX(500);
         NameCategory.setPickOnBounds(true);
         root.getChildren().add(NameCategory);
@@ -68,7 +100,7 @@ public class Menu {
         Text Help = new Text("Pomoc");
         Help.setStyle("-fx-font-size: 40pt;");
         Help.setFill(Color.WHITE);
-        Help.setLayoutY(470);
+        Help.setLayoutY(572);
         Help.setLayoutX(800);
         Help.setPickOnBounds(true);
         root.getChildren().add(Help);
@@ -99,13 +131,13 @@ public class Menu {
             root.getChildren().clear();
             switch (NameCategory.getText()) {
                 case "Zwierzęta":
-                    Game.menu(root, primaryStage, 'z');
+                    Game.menu(root, primaryStage, 'z', NameLevel.getText());
                     break;
                 case "Budowle":
-                    Game.menu(root, primaryStage, 'b');
+                    Game.menu(root, primaryStage, 'b', NameLevel.getText());
                     break;
                 default:
-                    Game.menu(root, primaryStage, 'p');
+                    Game.menu(root, primaryStage, 'p', NameLevel.getText());
                     break;
             }
         });
@@ -125,6 +157,10 @@ public class Menu {
             root.getChildren().add(Left);
             root.getChildren().add(Right);
             root.getChildren().add(NameCategory);
+            root.getChildren().add(Level);
+            root.getChildren().add(LeftLevel);
+            root.getChildren().add(RightLevel);
+            root.getChildren().add(NameLevel);
 
         });
 
@@ -141,6 +177,44 @@ public class Menu {
             root.getChildren().add(Instruction);
         });
 
+        LeftLevel.setOnMouseExited((MouseEvent e) -> { // Po zjechaniu wykonaj
+            LeftLevel.setFill(Color.WHITE);
+        });
+        LeftLevel.setOnMouseEntered((MouseEvent e) -> { // Po najechaniu wykonaj
+            LeftLevel.setFill(Color.RED);
+        });
+        LeftLevel.setOnMouseClicked((MouseEvent e) -> {
+            switch (NameLevel.getText()) {
+                case "Trudny":
+                    NameLevel.setText("Średni");
+                    break;
+                case "Średni":
+                    NameLevel.setText("Łatwy");
+                    break;
+                default:
+                    NameLevel.setText("Trudny");
+                    break;
+            }
+        });
+        RightLevel.setOnMouseExited((MouseEvent e) -> { // Po zjechaniu wykonaj
+            RightLevel.setFill(Color.WHITE);
+        });
+        RightLevel.setOnMouseEntered((MouseEvent e) -> { // Po najechaniu wykonaj
+            RightLevel.setFill(Color.RED);
+        });
+        RightLevel.setOnMouseClicked((MouseEvent e) -> {
+            switch (NameLevel.getText()) {
+                case "Łatwy":
+                    NameLevel.setText("Średni");
+                    break;
+                case "Średni":
+                    NameLevel.setText("Trudny");
+                    break;
+                default:
+                    NameLevel.setText("Łatwy");
+                    break;
+            }
+        });
         Left.setOnMouseExited((MouseEvent e) -> { // Po zjechaniu wykonaj
             Left.setFill(Color.WHITE);
         });
