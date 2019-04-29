@@ -112,7 +112,7 @@ public class Menu {
         Back.setLayoutX(475);
         Back.setPickOnBounds(true);
 
-        Text Instruction = new Text("Cala instrukcja do gry ble ble ble Cala instrukcja do gry ble ble ble Cala instrukcja do gry ble ble ble Cala instrukcja do gry ble ble ble");
+        Text Instruction = new Text("Pomoc");
         Instruction.setStyle("-fx-font-size: 20pt;");
         Instruction.setFill(Color.WHITE);
         Instruction.setLayoutY(140);
