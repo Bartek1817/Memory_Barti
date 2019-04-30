@@ -10,6 +10,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
 /**
@@ -20,7 +21,7 @@ public class Menu {
 
     static void menu(BorderPane root, Stage primaryStage) {
 
-        ImageView Logo = new ImageView("file:logo.png");
+        ImageView Logo = new ImageView("file:img/logo.png");
         Logo.setLayoutY(50);
         Logo.setLayoutX(300);
         root.getChildren().add(Logo);
@@ -112,13 +113,19 @@ public class Menu {
         Back.setLayoutX(475);
         Back.setPickOnBounds(true);
 
-        Text Instruction = new Text("Pomoc");
+        Text Instruction = new Text("Memory_Barti to typowa gra pamięciowa w której "
+                + "gracz ma zadanie znaleźć pary takich samych kart. Rozgrywka "
+                + "kończy się wtedy gdy uda się odnaleźć wszystkie z nich.\n \n Gracz ma "
+                + "możliwość wyboru poziomu trudności jak również może zdecydować jaka kategoria kart będzie wyświetlana.\n\n"
+                + "                                           Grę stworzył Bartłomiej Żmuda");
+        
         Instruction.setStyle("-fx-font-size: 20pt;");
         Instruction.setFill(Color.WHITE);
         Instruction.setLayoutY(140);
         Instruction.setLayoutX(275);
         Instruction.setPickOnBounds(true);
-        Instruction.setWrappingWidth(400);
+        Instruction.setWrappingWidth(600);
+        Instruction.setTextAlignment(TextAlignment.JUSTIFY);
 
         Start.setOnMouseExited((MouseEvent e) -> { // Po zjechaniu wykonaj
             Start.setFill(Color.WHITE);

@@ -31,12 +31,12 @@ public class Game {
             int front = new Random().nextInt(5);
             for (int i = 0; i < 18; i++) // Pętla do tworzenia Kart
             {
-                Card card = new Card(i + 100, "file:karta" + front + ".jpg", "file:" + category + i / 2 + ".png", i / 2, controller);
+                Card card = new Card(i + 100, "file:img/karta" + front + ".jpg", "file:img/" + category + i / 2 + ".png", i / 2, controller);
                 listCard.add(card);
             }
         } else {
             for (int i = 0; i < 18; i++) {
-                Card card = new Card(i + 100, "file:karta" + new Random().nextInt(5) + ".jpg", "file:" + category + i / 2 + ".png", i / 2, controller);
+                Card card = new Card(i + 100, "file:img/karta" + new Random().nextInt(5) + ".jpg", "file:img/" + category + i / 2 + ".png", i / 2, controller);
                 listCard.add(card);
             }
         }
@@ -132,7 +132,7 @@ public class Game {
 
         controller.getKtimer().startTimer(0);
 
-        ImageView Logo = new ImageView("file:logo200.png");
+        ImageView Logo = new ImageView("file:img/logo200.png");
         Logo.setLayoutY(50);
         Logo.setLayoutX(910);
         root.getChildren().add(Logo);
