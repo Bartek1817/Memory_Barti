@@ -29,8 +29,7 @@ public class Game {
 
         if (!level.equals("Trudny")) {
             int front = new Random().nextInt(5);
-            for (int i = 0; i < 18; i++) // Pętla do tworzenia Kart
-            {
+            for (int i = 0; i < 18; i++) {
                 Card card = new Card(i + 100, "file:img/karta" + front + ".jpg", "file:img/" + category + i / 2 + ".png", i / 2, controller);
                 listCard.add(card);
             }

@@ -118,7 +118,7 @@ public class Menu {
                 + "kończy się wtedy gdy uda się odnaleźć wszystkie z nich.\n \n Gracz ma "
                 + "możliwość wyboru poziomu trudności jak również może zdecydować jaka kategoria kart będzie wyświetlana.\n\n"
                 + "                                           Grę stworzył Bartłomiej Żmuda");
-        
+
         Instruction.setStyle("-fx-font-size: 20pt;");
         Instruction.setFill(Color.WHITE);
         Instruction.setLayoutY(140);
